@@ -52,40 +52,30 @@ func GenerateToken(key string, userId string, ttl int64, reason string, roles []
 	claims["UserId"] = userId
 	claims["Expire"] = time.Now().Add(time.Millisecond * time.Duration(ttl)).Format("2006-01-02 15:04:05")
 
-	// اضافه کردن سایر claims سفارشی
 	if otherClaims != nil {
 		for _, customClaim := range otherClaims {
 			claims[customClaim.Key] = customClaim.Value
 		}
 	}
 
-	// اضافه کردن TokenId
 	if tokenId != "" {
 		claims["TokenId"] = tokenId
 	}
 
-	// اضافه کردن نقش‌ها
 	if roles != nil && len(roles) > 0 {
-		// ایجاد یک آرایه برای ذخیره همه رول‌ها
 		var roleList []string
 
-		// اضافه کردن تمام رول‌ها به آرایه
 		for _, role := range roles {
 			roleList = append(roleList, role)
 		}
 
-		// ذخیره لیست رول‌ها در claims
 		claims["Role"] = roleList
 	}
 
-	// اضافه کردن دلیل
 	if reason != "" {
 		claims["Reason"] = reason
 	}
 
-	// امضای توکن
-	// استفاده از HMAC-SHA256 برای امضا کردن توکن
-	// تولید security key
 	securityKey := []byte(key)
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 

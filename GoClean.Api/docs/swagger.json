@@ -1,0 +1,85 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/sampleget": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Commons.ResponseModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/samplepost": {
+            "post": {
+                "parameters": [
+                    {
+                        "description": "Sample data",
+                        "name": "requestBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Sample.SampleBusinessServiceInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Commons.ResponseModel"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Commons.ResponseDetail": {
+            "type": "object",
+            "properties": {
+                "Data": {},
+                "ErrorMessages": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "IsSuccess": {
+                    "type": "boolean"
+                },
+                "Message": {
+                    "type": "string"
+                },
+                "ResultCode": {
+                    "type": "integer"
+                }
+            }
+        },
+        "Commons.ResponseModel": {
+            "type": "object",
+            "properties": {
+                "httpStatusCode": {
+                    "type": "integer"
+                },
+                "responseDetil": {
+                    "$ref": "#/definitions/Commons.ResponseDetail"
+                }
+            }
+        },
+        "Sample.SampleBusinessServiceInput": {
+            "type": "object",
+            "properties": {
+                "field": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

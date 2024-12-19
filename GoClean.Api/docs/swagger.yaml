@@ -1,0 +1,52 @@
+definitions:
+  Commons.ResponseDetail:
+    properties:
+      Data: {}
+      ErrorMessages:
+        items:
+          type: string
+        type: array
+      IsSuccess:
+        type: boolean
+      Message:
+        type: string
+      ResultCode:
+        type: integer
+    type: object
+  Commons.ResponseModel:
+    properties:
+      httpStatusCode:
+        type: integer
+      responseDetil:
+        $ref: '#/definitions/Commons.ResponseDetail'
+    type: object
+  Sample.SampleBusinessServiceInput:
+    properties:
+      field:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /sampleget:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Commons.ResponseModel'
+  /samplepost:
+    post:
+      parameters:
+      - description: Sample data
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/Sample.SampleBusinessServiceInput'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Commons.ResponseModel'
+swagger: "2.0"
