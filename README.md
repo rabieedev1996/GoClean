@@ -9,5 +9,5 @@ Other foundational features such as Jalali and Gregorian date management, list h
 
 The project structure is based on Clean Architecture and follows the hierarchy shown below.
 
-<img src="https://s3.ir-thr-at1.arvanstorage.ir/rabieestage/Untitled-2024-12-24-1406.png?versionId=1">
+<img src="https://s3.ir-thr-at1.arvanstorage.ir/rabieestage/Untitled-2024-12-24-1406.png">
 
