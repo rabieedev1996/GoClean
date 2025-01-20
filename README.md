@@ -9,36 +9,5 @@ Other foundational features such as Jalali and Gregorian date management, list h
 
 The project structure is based on Clean Architecture and follows the hierarchy shown below.
 
-GoClean
-├── GoClean.Api
-│   ├── docs
-│   └── Middlewares
-├── GoClean.Application
-│   ├── Commons
-│   ├── Contract
-│   ├── Database
-│   │   ├── MongoDB
-│   │   ├── Neo4J
-│   │   └── Sql
-│   ├── Services
-│   └── Features
-│       ├── Api
-│       │   └── Sample
-│       └── Model
-├── GoClean.Common
-├── GoClean.Domain
-│   ├── Entities
-│   │   ├── MongoDB
-│   │   ├── Neo4J
-│   │   └── Sql
-│   └── Enums
-├── GoClean.Identity
-├── GoClean.Infrastructure
-│   ├── Database
-│   │   ├── MongoDB
-│   │   ├── Neo4J
-│   │   └── Sql
-│   ├── ServiceImpl
-│   │   └── SMSIR
-│   └── Services
+<img src="https://rabieestage.s3.ir-thr-at1.arvanstorage.ir/Untitled-2024-12-24-1406.png?versionId=">
 
