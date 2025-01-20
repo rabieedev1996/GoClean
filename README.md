@@ -11,3 +11,7 @@ The project structure is based on Clean Architecture and follows the hierarchy s
 
 <img width="200" src="https://s3.ir-thr-at1.arvanstorage.ir/rabieestage/Untitled-2024-12-24-1406.png">
 
+How to Run the Project
+1) Clone the project.
+2) Add build configurations and set the environment variables according to the Config.go file.
+3) Run the project and navigate to the following URL: "http://localhost:{running port}/swagger/index.html".
