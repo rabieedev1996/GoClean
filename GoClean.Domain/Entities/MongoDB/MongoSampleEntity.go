@@ -1,5 +1,11 @@
 package MongoDB
 
 type MongoSampleEntity struct {
-	*MongoBaseEntity
+	*MongoBaseEntity `bson:",inline"`
+}
+
+func NewMongoSampleEntity() MongoSampleEntity {
+	return MongoSampleEntity{
+		MongoBaseEntity: NewMongoBaseEntity(),
+	}
 }

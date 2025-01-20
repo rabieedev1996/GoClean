@@ -3,7 +3,6 @@ package Sql
 import (
 	GoClean_Domain "GoClean/GoClean.Domain"
 	"fmt"
-	"gorm.io/driver/sqlserver"
 	"gorm.io/gorm"
 	"reflect"
 	"strings"
@@ -13,22 +12,11 @@ type SqlBaseRepository[entity any] struct {
 	Context *gorm.DB
 }
 
-// MSSQL
-func NewSqlBaseRepository[T any](config GoClean_Domain.Configs_Sql) *SqlBaseRepository[T] {
-	db, _ := gorm.Open(sqlserver.Open(config.Connection), &gorm.Config{})
+func NewSqlBaseRepository[T any](conn GoClean_Domain.GormConn) *SqlBaseRepository[T] {
 	return &SqlBaseRepository[T]{
-		Context: db,
+		Context: conn.DB,
 	}
 }
-
-// Postgres
-//
-//	func NewSqlBaseRepository[T any](config GoClean_Domain.Configs_Sql) *SqlBaseRepository[T] {
-//		db, _ := gorm.Open(postgres.Open(config.Connection), &gorm.Config{})
-//		return &SqlBaseRepository[T]{
-//			Context: db,
-//		}
-//	}
 
 func (r SqlBaseRepository[entity]) Init(guid string) {
 	//databaseConnection := InjectionConfig.PrepareObject[Config.DatabaseConnection](reflect.TypeOf(Config.DatabaseConnection{}), guid)

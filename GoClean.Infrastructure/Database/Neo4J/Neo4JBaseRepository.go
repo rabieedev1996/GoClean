@@ -6,6 +6,7 @@ import (
 	"GoClean/GoClean.Domain/Entities/Neo4J"
 	"context"
 	"encoding/json"
+	"fmt"
 	"github.com/neo4j/neo4j-go-driver/v5/neo4j"
 )
 
@@ -14,14 +15,10 @@ type Neo4JBaseRepository[T any] struct {
 	Label  string
 }
 
-func NewNeo4JBaseRepository[T any](configs Entities.Configs_Neo4J) *Neo4JBaseRepository[T] {
-	uri := configs.URI
-	username := configs.Username
-	password := configs.Password
-	driver, _ := neo4j.NewDriverWithContext(uri, neo4j.BasicAuth(username, password, ""))
+func NewNeo4JBaseRepository[T any](conn Entities.Neo4JConn) *Neo4JBaseRepository[T] {
 	label := Entities.GetAllias[T]()
 	return &Neo4JBaseRepository[T]{
-		Driver: driver,
+		Driver: conn.Driver,
 		Label:  label,
 	}
 }
@@ -39,6 +36,7 @@ func (r *Neo4JBaseRepository[T]) Create(entity *T) (int64, error) {
 		props, neo4j.EagerResultTransformer,
 		neo4j.ExecuteQueryWithDatabase("neo4j"))
 	if err != nil {
+		fmt.Println(err.Error())
 		panic(err)
 	}
 	rId, _ := result.Records[0].Get("recordId")
@@ -68,7 +66,7 @@ func (r *Neo4JBaseRepository[T]) Update(entity *T, Id int64) error {
 	_, err := session.ExecuteWrite(context.Background(), func(tx neo4j.ManagedTransaction) (any, error) {
 		query := `MATCH (n:` + r.Label + `) where id(n)=$id SET n += $props RETURN n`
 		_, err := tx.Run(context.Background(), query, map[string]interface{}{
-			"id":    Id, // فرض کنید ID در ساختار T وجود دارد
+			"id":    Id,
 			"props": props1,
 		})
 		return nil, err

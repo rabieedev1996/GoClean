@@ -16,6 +16,11 @@ var Debug string
 func main() {
 	Debug = os.Getenv("IS_DEBUG")
 	GetProjectConfigs()
+	MongoConn = *NewMongoDatabaseConn()
+	Neo4JConn = *NewNeo4JConn()
+	GORMConn = *NewSQLGormConnecting()
+	go mongoMonitorConnection()
+	go Neo4jMonitorConnection()
 	ginRouter := RegisterGin()
 	ginRouter.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	ginRouter.Run(":8080")

@@ -7,6 +7,7 @@ type Configs struct {
 	FileServiceConfig Configs_FileService
 	SMSConfigs        Configs_SMS
 	TokeKey           string
+	SMSConfig         Configs_SMS
 }
 type Configs_Mongo struct {
 	Connection   string

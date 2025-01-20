@@ -6,7 +6,6 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
 	"reflect"
 )
 
@@ -15,19 +14,10 @@ type MongoBaseRepository[entity any] struct {
 	Context    context.Context
 }
 
-func NewMongoBaseRepository[T any](configs Entities.Configs_Mongo) *MongoBaseRepository[T] {
-	client, err := mongo.NewClient(options.Client().ApplyURI(configs.Connection))
-	if err != nil {
-		panic(err)
-	}
-	ctx := context.TODO()
-	err = client.Connect(ctx)
-
-	database := client.Database(configs.DatabaseName)
-	collection := database.Collection(Entities.GetAllias[T]())
-
+func NewMongoBaseRepository[T any](conn Entities.MongoConn) *MongoBaseRepository[T] {
+	collection := conn.Database.Collection(Entities.GetAllias[T]())
 	return &MongoBaseRepository[T]{
-		Context:    ctx,
+		Context:    conn.DbContext,
 		Collection: collection,
 	}
 

@@ -8,7 +8,8 @@ func GetAllias[T any]() string {
 	switch typeName {
 	case "MongoSampleEntity":
 		return "mongo_sample_entity"
-
+	case "Neo4JSampleEntity":
+		return "neo_sample_entity"
 	}
 	return ""
 }

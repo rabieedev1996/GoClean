@@ -31,7 +31,7 @@ func GetDIContainer() *dig.Container {
 }
 func DBRegisteration(projectConfigs *GoClean_Domain.Configs, container *dig.Container) {
 	container.Provide(func() *MongoDB3.MongoBaseRepository[MongoDB2.MongoSampleEntity] {
-		service := MongoDB3.NewMongoBaseRepository[MongoDB2.MongoSampleEntity](projectConfigs.MongoConfig)
+		service := MongoDB3.NewMongoBaseRepository[MongoDB2.MongoSampleEntity](MongoConn)
 		return service
 	})
 	container.Provide(func(mongoBaseRepository *MongoDB3.MongoBaseRepository[MongoDB2.MongoSampleEntity]) *MongoDB.IMongoSampleEntityRepository {
@@ -40,7 +40,7 @@ func DBRegisteration(projectConfigs *GoClean_Domain.Configs, container *dig.Cont
 	})
 
 	container.Provide(func() *Neo4J.Neo4JBaseRepository[Neo4J2.Neo4JSampleEntity] {
-		service := Neo4J.NewNeo4JBaseRepository[Neo4J2.Neo4JSampleEntity](projectConfigs.Neo4JConfig)
+		service := Neo4J.NewNeo4JBaseRepository[Neo4J2.Neo4JSampleEntity](Neo4JConn)
 		return service
 	})
 	container.Provide(func(neoBaseRepository *Neo4J.Neo4JBaseRepository[Neo4J2.Neo4JSampleEntity]) *Neo4J3.INeo4JSampleEntityRepository {
@@ -49,7 +49,7 @@ func DBRegisteration(projectConfigs *GoClean_Domain.Configs, container *dig.Cont
 	})
 
 	container.Provide(func() *Sql.SqlBaseRepository[Sql2.SqlSampleEntity] {
-		service := Sql.NewSqlBaseRepository[Sql2.SqlSampleEntity](projectConfigs.SqlConfig)
+		service := Sql.NewSqlBaseRepository[Sql2.SqlSampleEntity](GORMConn)
 		return service
 	})
 	container.Provide(func(sqlBaseRepository *Sql.SqlBaseRepository[Sql2.SqlSampleEntity]) *Sql3.ISqlSampleEntityRepository {
@@ -78,8 +78,8 @@ func ServiceRegisteration(projectConfigs *GoClean_Domain.Configs, container *dig
 }
 
 func HandlerRegisteration(projectConfigs *GoClean_Domain.Configs, container *dig.Container) {
-	container.Provide(func(messageService *Services.IMessageService) *Sample.SampleBusinessServiceHandler {
-		service := Sample.NewSampleBusinessServiceHandler(messageService)
+	container.Provide(func(messageService *Services.IMessageService, mongoSampleEntityRepository *MongoDB.IMongoSampleEntityRepository, sqlSampleEntityRepository *Sql3.ISqlSampleEntityRepository, Neo4JSampleEntityRepository *Neo4J3.INeo4JSampleEntityRepository) *Sample.SampleBusinessServiceHandler {
+		service := Sample.NewSampleBusinessServiceHandler(messageService, mongoSampleEntityRepository, sqlSampleEntityRepository, Neo4JSampleEntityRepository)
 		return service
 	})
 
