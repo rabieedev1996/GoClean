@@ -22,4 +22,4 @@ The project structure is based on Clean Architecture and follows the hierarchy s
 I am available to answer your questions about this project.
 
 - My Telegram ID: mrabiee1996
-- My WhatsApp Phone: 09128003185
+- My LinkedIn: mrabiee1996
