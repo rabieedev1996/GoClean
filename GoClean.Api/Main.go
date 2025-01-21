@@ -18,7 +18,7 @@ func main() {
 	GetProjectConfigs()
 	MongoConn = *NewMongoDatabaseConn()
 	Neo4JConn = *NewNeo4JConn()
-	GORMConn = *NewSQLGormConnecting()
+	GORMConn = *NewPGSqlGormConnecting()
 	go mongoMonitorConnection()
 	go Neo4jMonitorConnection()
 	ginRouter := RegisterGin()

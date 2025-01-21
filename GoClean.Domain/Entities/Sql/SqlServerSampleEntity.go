@@ -9,3 +9,6 @@ func NewSqlSampleEntity() SqlSampleEntity {
 		SqlBaseEntity: NewSqlBaseEntity(),
 	}
 }
+func (SqlSampleEntity) TableName() string {
+	return "SqlSampleEntity" // نام مورد نظر شما
+}

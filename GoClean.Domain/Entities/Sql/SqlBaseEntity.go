@@ -7,11 +7,15 @@ import (
 )
 
 type SqlBaseEntity struct {
-	CreatedOn    int64
-	CreatedOnFa  int64
-	Time         string
-	IsDeleted    bool
-	FullDateTime int64
+	Id int64 `gorm:" primaryKey;column: Id"`
+	///for MSSQL
+	//CreatedOn    time.Time `gorm:" column: CreatedOn;type:datetime"`
+	///for PGSQL
+	CreatedOn    time.Time `gorm:" column: CreatedOn;"`
+	CreatedOnFa  int64     `gorm:" column: CreatedOnFa"`
+	Time         string    `gorm:" column: Time"`
+	IsDeleted    bool      `gorm:" column: IsDeleted"`
+	FullDateTime int64     `gorm:" column: FullDateTime"`
 }
 
 func NewSqlBaseEntity() *SqlBaseEntity {
@@ -21,11 +25,11 @@ func NewSqlBaseEntity() *SqlBaseEntity {
 	jalali := *miladi.ToJalaliDateToll()
 
 	fullDateTime, _ := strconv.ParseInt(miladi.Format("yyyyMMddHHmmss"), 10, 64)
-	dateTime, _ := strconv.ParseInt(miladi.Format("yyyyMMdd"), 10, 64)
+	//dateTime, _ := strconv.ParseInt(miladi.Format("yyyyMMdd"), 10, 64)
 	pdateTime, _ := strconv.ParseInt(jalali.Format("yyyyMMdd"), 10, 64)
 
 	return &SqlBaseEntity{
-		CreatedOn:    dateTime,
+		CreatedOn:    miladi.Time,
 		CreatedOnFa:  pdateTime,
 		Time:         miladi.Format("HH:mm:ss"),
 		IsDeleted:    false,

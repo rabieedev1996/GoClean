@@ -5,8 +5,7 @@ import (
 	"GoClean/GoClean.Application/Contract/Database/Neo4J"
 	"GoClean/GoClean.Application/Contract/Database/Sql"
 	"GoClean/GoClean.Application/Contract/Services"
-	MongoDB2 "GoClean/GoClean.Domain/Entities/MongoDB"
-	Neo4J2 "GoClean/GoClean.Domain/Entities/Neo4J"
+	Sql2 "GoClean/GoClean.Domain/Entities/Sql"
 )
 
 type SampleBusinessServiceHandler struct {
@@ -33,11 +32,14 @@ func (receiver SampleBusinessServiceHandler) Handle(input *SampleBusinessService
 	//responseObject := responseGenerator.GetResponseObjectResult(Commons.RESULT_CODE_VALIDATION_ERROR, nil)
 	//panic(&responseObject)
 
-	mongoSampleEntity := MongoDB2.NewMongoSampleEntity()
-	(*receiver.MongoSampleEntityRepository).Insert(&mongoSampleEntity)
+	//mongoSampleEntity := MongoDB2.NewMongoSampleEntity()
+	//(*receiver.MongoSampleEntityRepository).Insert(&mongoSampleEntity)
+	//
+	//neoSampleEntity := Neo4J2.NewNeo4JSampleEntity()
+	//(*receiver.Neo4JSampleEntityRepository).Create(&neoSampleEntity)
 
-	neoSampleEntity := Neo4J2.NewNeo4JSampleEntity()
-	(*receiver.Neo4JSampleEntityRepository).Create(&neoSampleEntity)
+	sqlSampleentity := Sql2.NewSqlSampleEntity()
+	(*receiver.SqlSampleEntityRepository).Create(&sqlSampleentity)
 
 	return &SampleBusinessServiceOutput{}
 }

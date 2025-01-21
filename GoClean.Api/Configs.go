@@ -34,7 +34,7 @@ func GetProjectConfigs() *GoClean_Domain.Configs {
 			Password: os.Getenv("NEO4J_PASSWORD"),
 		},
 		SqlConfig: GoClean_Domain.Configs_Sql{
-			Connection: os.Getenv("SQL_CONNECTION"),
+			Connection: os.Getenv("PSQL_CONNECTION"),
 		},
 		TokeKey:   os.Getenv("TOKEN_KEY"),
 		SMSConfig: GoClean_Domain.Configs_SMS{SMSIRToken: os.Getenv("SMSIR_CONFIG")},
