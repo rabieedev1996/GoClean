@@ -1,0 +1,3 @@
+The API layer contains Gin handlers for RESTful APIs, a DI container and its configurations using the Dig framework, project-wide global variables, and database settings.
+Project documentation is prepared with swagger framework.
+This project supports multiple databases, including MSSQL, PostgreSQL, MongoDB, and Neo4j. Connection pooling management for each of these databases is handled using specific patterns developed in this layer.If these patterns are not followed, database connections increase disproportionately, leading to various database issues and potentially causing the database to crash.
