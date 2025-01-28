@@ -4,9 +4,9 @@ For example, the code below is one of the Gin handlers that uses the Authorize m
 
 ```go
 router.GET("/api/sample", func(c *gin.Context) {
-		container := GetDIContainer()
-		container.Invoke(func( tokenUser *Models.TokenUser) {
-      //filling the TokenUser object
-			jwtHelper.GINAuthorize(tokenUser, .....)
-			....
-		})
+container := GetDIContainer()
+container.Invoke(func( tokenUser *Models.TokenUser) {
+//filling the TokenUser object
+jwtHelper.GINAuthorize(tokenUser, ...)
+...
+})
