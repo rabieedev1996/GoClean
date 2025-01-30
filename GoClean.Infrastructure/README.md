@@ -1,7 +1,7 @@
 the Infrastructure layer contains implention of interfaces that Application layer needed it. Database repositories and other external services implemented in Infrastructure.
 
 
-Dependency Inversion in SOLID Principles
+<b>Dependency Inversion in SOLID Principles</b>
 
 In the SOLID principles, Dependency Inversion (DI) is a technique used to reduce the coupling between components of an application by injecting dependencies rather than having components create them internally. This ensures that classes do not need to know how to create the objects they depend on, making them more flexible, reusable, and easier to test.
 
@@ -18,7 +18,9 @@ Through DI, you ensure that the Application layer can use the services from the 
 By adhering to these principles, you achieve a highly decoupled, testable, and maintainable system.
 
 
-What is the "ServiceImpl" directory?
+<b>What is the "ServiceImpl" directory?</b>
+
+
 The "ServiceImpl" directory contains the implementation of non-standard functions for services that require additional, customized logic. For example, in the case of the "SMSService" in the Service Directory, it implements the "ISMSService" interface from the application layer. Since SMS sending requires various providers and methods that may not be standard, the ServiceImpl directory is where these non-standard functions are implemented.
 
 In this approach:
