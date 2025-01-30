@@ -25,8 +25,10 @@ The "ServiceImpl" directory contains the implementation of non-standard function
 
 In this approach:
 
-"SMSService" has an object of "ISMSImpl".
+"SMSService" has an object of "ISMSImpl".<br>
 "SMSIRMethods" implements the "ISMSImpl" interface.
+
+
 This design ensures that we adhere to the Open/Closed and Dependency Inversion (DI) principles, while the additional, custom logic is contained within the ServiceImpl directory, keeping the main service logic clean and modular.
 
 
