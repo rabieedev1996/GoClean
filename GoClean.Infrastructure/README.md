@@ -16,3 +16,20 @@ Infrastructure Layer: This layer provides the concrete implementations of the in
 Through DI, you ensure that the Application layer can use the services from the Infrastructure layer without directly creating instances, thus maintaining flexibility and making it easier to swap out implementations when needed (for example, switching from one database to another).
 
 By adhering to these principles, you achieve a highly decoupled, testable, and maintainable system.
+
+
+What is the "ServiceImpl" directory?
+The "ServiceImpl" directory contains the implementation of non-standard functions for services that require additional, customized logic. For example, in the case of the "SMSService" in the Service Directory, it implements the "ISMSService" interface from the application layer. Since SMS sending requires various providers and methods that may not be standard, the ServiceImpl directory is where these non-standard functions are implemented.
+
+In this approach:
+
+"SMSService" has an object of "ISMSImpl".
+"SMSIRMethods" implements the "ISMSImpl" interface.
+This design ensures that we adhere to the Open/Closed and Dependency Inversion (DI) principles, while the additional, custom logic is contained within the ServiceImpl directory, keeping the main service logic clean and modular.
+
+
+
+
+
+
+
